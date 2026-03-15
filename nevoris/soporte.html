@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Soporte | Nevoris IT Solutions</title>
+
+<style>
+
+:root{
+--bg:#010008;
+--card:#0d081f;
+--violet:#9d4edd;
+--blue:#5eead4;
+--neon:#b084f5;
+--text:#e5e7eb;
+--muted:#a1a1aa;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:system-ui,Segoe UI,Arial;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+#circuit-bg{
+position:fixed;
+inset:0;
+z-index:-1;
+}
+
+/* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(1, 0, 8, 0.85);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(157, 78, 221, 0.3);
+      }
+      .nav {
+        max-width: 1200px;
+        margin: auto;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      .brand svg {
+        width: 40px;
+        height: 40px;
+        stroke: var(--neon);
+        fill: none;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 8px var(--neon));
+        animation: logoGlow 2s infinite alternate;
+      }
+      .brand-text {
+        margin-left: 10px;
+        font-size: 22px;
+        font-weight: 900;
+        background: linear-gradient(90deg, var(--violet), var(--blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      @keyframes logoGlow {
+        0% {
+          filter: drop-shadow(0 0 6px var(--violet));
+        }
+        100% {
+          filter: drop-shadow(0 0 14px var(--blue));
+        }
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .nav-links a:hover {
+        color: var(--neon);
+      }
+
+      /* MENU MOBILE */
+      .menu-btn {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+      }
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+        .nav-links {
+          position: absolute;
+          top: 64px;
+          right: 20px;
+          background: rgba(5, 2, 20, 0.95);
+          border: 1px solid rgba(157, 78, 221, 0.3);
+          border-radius: 14px;
+          flex-direction: column;
+          padding: 16px;
+          display: none;
+        }
+        .nav-links.show {
+          display: flex;
+        }
+      }
+
+
+.nav-links{
+display:flex;
+gap:20px;
+}
+
+.nav-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:14px;
+}
+
+.nav-links a:hover{
+color:var(--neon);
+}
+
+header{
+padding:140px 20px 40px;
+text-align:center;
+max-width:900px;
+margin:auto;
+}
+
+header h1{
+font-size:40px;
+text-shadow:0 0 20px var(--violet);
+}
+
+header p{
+color:var(--muted);
+margin-top:10px;
+}
+
+section{
+max-width:700px;
+margin:auto;
+padding:40px 20px;
+}
+
+.ticket-card{
+background:linear-gradient(180deg,var(--card),#080515);
+border:1px solid rgba(157,78,221,.35);
+border-radius:18px;
+padding:30px;
+transition:.4s;
+box-shadow:0 0 25px rgba(157,78,221,.15);
+}
+
+.ticket-card:hover{
+box-shadow:0 0 35px var(--neon);
+}
+
+label{
+display:block;
+margin-bottom:6px;
+color:var(--muted);
+}
+
+input,select,textarea{
+width:100%;
+padding:14px;
+margin-bottom:16px;
+background:#010008;
+border:1px solid rgba(157,78,221,.3);
+border-radius:12px;
+color:var(--text);
+}
+
+textarea{
+resize:none;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,var(--violet),var(--blue));
+color:white;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 0 18px var(--neon);
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 0 30px var(--neon);
+}
+
+footer{
+text-align:center;
+padding:40px 20px;
+border-top:1px solid rgba(157,78,221,.25);
+color:var(--muted);
+margin-top:80px;
+}
+
+#wsp-btn{
+position:fixed;
+bottom:30px;
+right:30px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#25d366;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 0 25px #25d366aa;
+z-index:999;
+}
+
+#wsp-btn img{
+width:32px;
+}
+
+.back-btn{
+display:inline-block;
+margin-top:15px;
+padding:10px 18px;
+border-radius:10px;
+border:1px solid rgba(157,78,221,.4);
+color:var(--text);
+text-decoration:none;
+}
+
+.back-btn:hover{
+background:rgba(157,78,221,.15);
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="circuit-bg"></canvas>
+
+    <nav>
+      <div class="nav">
+        <div class="brand">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+            <line x1="2" y1="12" x2="4" y2="12" />
+            <line x1="20" y1="12" x2="22" y2="12" />
+            <line x1="12" y1="2" x2="12" y2="4" />
+            <line x1="12" y1="20" x2="12" y2="22" />
+          </svg>
+          <div class="brand-text">NEVORIS</div>
+        </div>
+        <div class="nav-links" id="menu">
+          <a href="index.html">Volver al Inicio</a>
+        </div>
+      </div>
+    </nav>
+
+<header>
+
+<h1>Portal de Soporte Técnico</h1>
+<p>Generá un ticket para que nuestro equipo pueda asistirte.</p>
+
+</header>
+
+<section>
+
+<form id="ticketForm" class="ticket-card" enctype="multipart/form-data">
+
+<label>Empresa</label>
+<input type="text" name="empresa" placeholder="Nombre de la empresa" required>
+
+<label>Solicitante</label>
+<input type="text" name="nombre" placeholder="Nombre de quien reporta" required>
+
+<label>Email de contacto</label>
+<input type="email" name="email" placeholder="ej: usuario@empresa.com" required>
+
+<label>Tipo de problema</label>
+<select name="tipo">
+
+<option>Hardware</option>
+<option>Software</option>
+<option>Sistema Operativo</option>
+<option>Red / Internet</option>
+<option>Impresora</option>
+<option>Archivos / Carpetas</option>
+<option>Servidor</option>
+<option>Correo</option>
+<option>Otro</option>
+
+</select>
+
+<label>Prioridad</label>
+<select name="prioridad">
+
+<option>Baja</option>
+<option>Media</option>
+<option>Alta</option>
+<option>Crítica</option>
+
+</select>
+
+<label>Descripción del problema</label>
+<textarea name="descripcion" rows="5" placeholder="Describí el problema" required></textarea>
+
+<label>Adjuntar captura o foto (opcional)</label>
+<small>Formatos permitidos: JPG o PNG · Máximo 5MB</small>
+<input type="file" name="imagen" accept="image/png,image/jpeg,image/jpg">
+
+<input type="text" name="empresa_web" style="display:none">
+<button type="submit">Generar Ticket</button>
+
+<a class="back-btn" href="index.html">← Volver al sitio</a>
+
+</form>
+
+<div id="mensajeTicket"></div>
+
+</section>
+
+<footer>
+© 2026 NEVORIS IT Solutions - Nos ocupamos de la tecnología, vos del negocio.
+</footer>
+
+<a id="wsp-btn" href="https://wa.link/jcb06r" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+</a>
+
+<script>
+
+/* MENU */
+      function toggleMenu() {
+        document.getElementById("menu").classList.toggle("show");
+      }
+
+      /* FONDO ANIMADO + PARTICULAS */
+      const canvas = document.getElementById("circuit-bg");
+      const ctx = canvas.getContext("2d");
+      let w = (canvas.width = innerWidth);
+      let h = (canvas.height = innerHeight);
+
+      class Line {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.vx = Math.random() - 0.5;
+          this.vy = Math.random() - 0.5;
+          this.l = 30 + Math.random() * 40;
+        }
+        draw() {
+          ctx.strokeStyle = "rgba(157,78,221,.35)";
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x + this.vx * this.l, this.y + this.vy * this.l);
+          ctx.stroke();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > w || this.y < 0 || this.y > h)
+            this.reset();
+        }
+      }
+      const lines = [...Array(160)].map(() => new Line());
+
+      class Particle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.vx = (Math.random() - 0.5) * 2;
+          this.vy = (Math.random() - 0.5) * 2;
+          this.o = 1;
+        }
+        draw() {
+          ctx.fillStyle = `rgba(176,132,245,${this.o})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+          ctx.fill();
+          this.x += this.vx;
+          this.y += this.vy;
+          this.o -= 0.03;
+        }
+      }
+      let parts = [];
+
+      function anim() {
+        ctx.clearRect(0, 0, w, h);
+        lines.forEach((l) => l.draw());
+        parts.forEach((p, i) => {
+          p.draw();
+          if (p.o <= 0) parts.splice(i, 1);
+        });
+        requestAnimationFrame(anim);
+      }
+      anim();
+
+      addEventListener("resize", () => {
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+      });
+      addEventListener("mousemove", (e) => {
+        for (let i = 0; i < 3; i++)
+          parts.push(new Particle(e.clientX, e.clientY));
+      });
+
+
+/* GENERAR TICKET MAIL */
+
+document.getElementById("ticketForm").addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const formData = new FormData(this)
+
+try{
+
+const response = await fetch("/api/ticket",{
+method:"POST",
+body:formData
+})
+
+const result = await response.text()
+
+document.getElementById("mensajeTicket").innerHTML=result
+
+this.reset()
+
+}catch(err){
+
+document.getElementById("mensajeTicket").innerHTML="❌ Error enviando el ticket."
+
+}
+
+})
+
+document.getElementById("ticketForm").addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const formData = new FormData(this)
+
+// PROTECCION HONEYPOT
+if(formData.get("empresa_web")){
+return
+}
+
+try{
+
+const response = await fetch("/api/ticket",{
+method:"POST",
+body:formData
+})
+
+const result = await response.text()
+
+document.getElementById("mensajeTicket").innerHTML=result
+
+this.reset()
+
+}catch(err){
+
+document.getElementById("mensajeTicket").innerHTML="❌ Error enviando el ticket"
+
+}
+
+})
+</script>
+
+</body>
+</html>
